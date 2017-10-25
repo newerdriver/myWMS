@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>添加员工界面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <form action="add.do"  method="post">
+    	<label for="name">姓名：</label><input type="text"  id="name" name="name" placeholder="请输入员工姓名"> <br>
+    	<label for="salary">薪资：</label><input type="text"  id="salary" name="salary" placeholder="请输入薪水"> <br>
+    	<label for="age">年龄：</label><input type="text"  id="age" name="age"placeholder="请输入年龄"> <br>
+    	<input type="submit" value="提交">
+    </form>
+  </body>
+  	<input type="button"  value="查询" onclick="listEmp()">
+  	<div id="listEmp"></div>
+  	<script type="text/javascript">
+  		function listEmp(){
+  		var xmlRequest=new XMLHttpRequest();
+
+		xmlRequest.onreadystatechange=function(){
+			if(xmlRequest.readyState==4&&xmlRequest.status==200){	
+				document.getElementById("listEmp").innerHTML=xmlRequest.responseText;
+			}
+
+		}
+  			xmlRequest.open("get", "/web04/mvc.txt",true);//method,url,是否异步。true，异步 false，同步
+			xmlRequest.send();	
+  		}
+  	</script>
+</html>

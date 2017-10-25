@@ -1,0 +1,42 @@
+servlet生命周期：
+	创建：容器去创建servlet：只能创建一次
+		1.在Tomcat启动时创建，需要在web.xml中配置load-on-startup标记（在加载时就启动）；
+		2.第一次访问该servlet时创建，容器只会创建一个servlet，是单例的，第二次不在创建；当多线程访问时需要注意并发安全性问题。
+	初始化：初始化只能初始一次；
+	
+	GenericServlet重写父类的Servlet的init(ServletConfig config);
+	genernicServlet的init（）方法。
+	init (ServletConfig config){
+		config=this.config;
+		this.init()
+	}
+	init(）{}；
+	servlet若要修改初始化方式则重写GenericServlet的无参的init（）；
+	
+	在servlet中获得ServletConfig:
+	<servlet>
+		<init-param>
+			<param-name></param-name>
+			<param-value></param-value>
+		</init-param>
+	</servlet>
+	init-param将参数注入ServletConfig,
+	获得ServletConfig:
+	getServletrConfig()获得ServletConfig对象，
+	通过config对象获得getinitParameter(name)获取相关参数
+	
+	
+	服务：容器调用servlet的service方法
+	容器调用servlet的service方法。
+	容器的service会根据请求方式不同调用doget(),doPost()处理请求，请求提交一次service响应一次。
+	
+	销毁：容器调用servlet的destory()方法常放servlet的生命周期前需要执行的操作。
+		
+容器执行顺序，先通过web.xml访问特定的servlet，在查找相应的静态资源，若还没找到，则出现404错误
+
+容器匹配拦截模式：
+1.精确模式<url-pattern>/add</url-pattern>
+2.通配模式<url-pattern>/*</url-pattern>任何都可匹配
+该模式导致静态资源也不能访问。
+3.后缀匹配：注：不能加/
+<url-pattern>*.(do|html|php|action)</url-pattern>

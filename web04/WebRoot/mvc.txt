@@ -1,0 +1,9 @@
+MVC:
+M(model)
+V(view):html,js等用户界面
+C(controller)：Servlet(分发或转发任务，尽量不处理业务，调用service处理业务)
+
+MVC程序执行流程：
+通过用户界面发送请求给controller，controller转发或分发任务，由子controller交给service，service调用实体类设置实体，
+DAO包通过实体类获取操作数据从而进行数据访问或修改操作
+前端MVC：regularJS
